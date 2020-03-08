@@ -20,20 +20,50 @@ class Game extends React.Component {
     }
 }
 
-class Square extends React.Component{
-    render(){
+function Square(props) {
+    
         return(
-            <button className="square">
-                {this.props.value}
+            <button 
+            className="square" 
+            onClick={props.onClick}
+            >  
+                {props.value}
             </button>
         )
-    }
+    
 }
+// this.props.value give the value obtained from parent component Board
+// this.state.value shows the value of the state
+//setState method to change the state 
+//this.props.onClick tells that the onClick event is handled by Board
+//onClick={()=>this.props.onClick()}. This first onClick is a attribute of button, it is built-in component
+//The second one is just name of props can be customized.
+//function component is a simpler way of component that only contain a render method but don't have their own state
 
 class Board extends React.Component{
-    renderSquare(i){
-        return <Square value={i}/>;
+    constructor(props){
+       super(props);
+       this.state={squares:Array(9).fill(null),
+    };
     }
+    //always use super when defining constructor of a subclass. 
+    //All React component classes that have a constrctor should start it with a super(props) call
+    renderSquare(i){
+        return (
+        <Square 
+        value={this.state.squares[i]} //Pass the value to the child react component
+        onClick={()=>this.handleClick(i)}/>
+        ); //pass another prop called onClick to Square. 
+        //this prop is a function that Square can call when clicked
+    }
+
+     handleClick(i){
+         const squares =this.state.squares.slice();
+         squares[i]='X';
+         this.setState({squares: squares});
+     }
+//.clice is to create a copy of the squares
+
     render(){
         const status="Next player: X"
 
