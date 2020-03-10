@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Square(props) {
     
@@ -66,7 +66,7 @@ class Board extends React.Component{
 
 
 
-class Game extends React.Component {
+class Tic extends React.Component {
     constructor(props){
         super(props);
         this.state={
@@ -171,4 +171,5 @@ function calculateWinner(squares){
 }
 
 
-export default Game
+export default Tic
+

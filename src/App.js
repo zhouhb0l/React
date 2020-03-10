@@ -1,7 +1,15 @@
 import React from 'react';
+//import Game from './Practice1'
+//import { render } from '@testing-library/react';
+
+import Navigation from './Navbar'
+import Routes from "./Routes"
+
+
+/*
 import logo from './logo.svg';
 import './App.css';
-import Practice1 from './Practice1'
+
 function App() {
   return (
     <div className="App">
@@ -24,3 +32,17 @@ function App() {
 }
 
 export default App;
+*/
+
+function App() {
+  return(
+    <div className="App">
+      <Navigation />
+      <Routes />
+    </div>
+  )
+}
+
+
+
+export default App
