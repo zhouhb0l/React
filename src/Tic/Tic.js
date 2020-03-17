@@ -91,7 +91,7 @@ class Tic extends React.Component {
         xIsNext:!this.state.xIsNext,
     });
     }
-//.clice is to create a copy of the squares
+//.slice is to create a copy of the squares
 
      jumpTo(step){
          this.setState(
