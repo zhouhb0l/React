@@ -11,7 +11,8 @@ class Home extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            card:['','','',''],
+            card:['2','5','7','8'],
+            sol:''
         }
     }
  
@@ -36,7 +37,20 @@ class Home extends React.Component{
         
     }
 
-    
+    showanswer=()=>{
+        const possibleAns=calculate(this.state.card)
+        const pa=[],items=[]
+        for(var i of possibleAns){
+            if(Number.isInteger(i) && i>0) pa.push(Number(i))
+        }
+        pa.sort(function(a,b){return a-b});
+
+        for(i of pa){
+            items.push(i+', ')
+        }
+
+        this.setState({sol:items})
+    }
 
 
 
@@ -58,8 +72,12 @@ class Home extends React.Component{
                     )
                 )
                 }
-            <button onClick={calculate(this.state.card)}>Calculate</button>
+            <button onClick={this.showanswer}>Calculate</button>
+             <p></p>
+             Possible solutions:<p></p>
+            <label>{this.state.sol}</label>
             </div>
+          
         )
        
     }
@@ -73,11 +91,59 @@ class Home extends React.Component{
 
 
 function calculate(card){
-   // console.log(card.length)
+    var ans=[],istr=[],ansReduced=[]
+    var i,j,x,y
+    var A=[],B=[]
+    var valA=[],valB=[]
+   if(card.length===1) {ansReduced.push(card[0])} else {
+      
+    for (i=1;i<(2**card.length)-1;i++){
+        istr=[];A=[];B=[]
+        for(j=i.toString(2).length-1;j>=0;j--){istr.unshift(i.toString(2)[j])}
+        for(j=i.toString(2).length;j<card.length;j++){istr.unshift('0')}
+        
+        for (j=0;j<card.length;j++){            
+          if(istr[j]==='1') {A.push(card[j])}
+          if(istr[j]==='0') {B.push(card[j])} 
+        }
+       // console.log(card,istr,'A',A,'B',B)
+     valA=calculate(A);valB=calculate(B)
+      
+      console.log(valA,valB)
+
+     for (x of valA){
+       
+         for(y of valB){
+            ans.push(Number(x)+Number(y));
+            ans.push(x-y); 
+            ans.push(x*y);
+            if(y!==0) {ans.push(x/y)};
+         }
+     }
+     
+     ansReduced=ans.filter((item,index)=> ans.indexOf(item)===index)
+
+    }
+      
 
 
 
 
+
+    }
+console.log(ansReduced)
+    return ansReduced
+
+
+
+
+
+
+
+
+
+
+ 
 
 }
 
