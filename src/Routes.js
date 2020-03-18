@@ -2,7 +2,9 @@ import React from "react";
 import {Router, Switch, Route} from "react-router-dom"
 
 import Tic from "./Tic/Tic";
-import Home from "./Home/Home"
+import Game24 from "./Game24/Game24";
+import LineOrSquare from "./LineOrSquare/LineOrSquare";
+
 import history from './history'
 
 class Routes extends React.Component{
@@ -11,8 +13,9 @@ class Routes extends React.Component{
         return(
             <Router history={history}>
             <Switch>
-                <Route path="/Home" component={Home}/>
+                <Route path="/Game24" component={Game24}/>
                 <Route path="/Tic" component={Tic}/>
+                <Route path="/LineOrSquare" component={LineOrSquare}/>
             </Switch>
             </Router>
         )

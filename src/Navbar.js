@@ -8,9 +8,12 @@ const Navigation=(props)=>{
             
            
                 <Nav className="mr-auto">
-                    <Nav.Link href="/Tic">Tic-Tac-Toe</Nav.Link>
-                    
-                    <Nav.Link href="/Home"> Second Game</Nav.Link>
+                    '<Nav.Link href="/Tic">Tic-Tac-Toe</Nav.Link>'
+                      ~~  
+                    '<Nav.Link href="/Game24"> Twenty-Four</Nav.Link>'
+                    ~~
+                    '<Nav.Link href="/LineOrSquare">Line-Or-Square</Nav.Link>'
+
                 </Nav>
            
         
