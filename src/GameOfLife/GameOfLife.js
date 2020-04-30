@@ -1,46 +1,46 @@
 import React from 'react';
-import './style.css';
-
-const N = 11;
+/*COMPONENTS */
+import Grid from './components/Grid';
+import { InputGroup, FormControl, Button, Badge } from 'react-bootstrap';
 
 export default class GameOfLife extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gridArray: Array(N)
-        .fill(0)
-        .map(() => Array(N).fill(0)),
+      isRunning: false,
+      count: 0,
     };
   }
 
-  /**
-   * reverse grid value
-   */
-  updateGrid(rowIndex, colIndex) {
-    const newGrid = this.state.gridArray;
-    newGrid[rowIndex][colIndex] = Number(!this.state.gridArray[rowIndex][colIndex]);
-    this.setState({ gridArray: newGrid });
-  }
-
   render() {
-    const { gridArray } = this.state;
+    const { isRunning, count } = this.state;
 
     return (
-      <div>
-        <table id="grid">
-          <tbody>
-            {gridArray.map((rows, rowIndex) => (
-              <tr key={rowIndex}>
-                {rows.map((col, colIndex) => (
-                  <td key={colIndex} onClick={() => this.updateGrid(rowIndex, colIndex)}>
-                    <span className={`blocks ${col === 0 ? null : 'dark'}`}></span>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <section className="container">
+        <div className="row mt-5">
+          <div className="col-sm-6">
+            <Grid />
+          </div>
+          <div className="col-sm-5 ">
+            <h2 className="pb-5">
+              Generation Times: <Badge variant="info">{count}</Badge>
+            </h2>
+            <InputGroup>
+              <FormControl placeholder="Rules" />
+              <InputGroup.Append>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => {
+                    this.setState({ isRunning: !isRunning });
+                  }}
+                >
+                  {isRunning ? 'Stop' : 'Start'}
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </div>
+        </div>
+      </section>
     );
   }
 }
