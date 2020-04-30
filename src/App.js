@@ -1,10 +1,10 @@
 import React from 'react';
+
 //import Game from './Practice1'
 //import { render } from '@testing-library/react';
 
-import Navigation from './Navbar'
-import Routes from "./Routes"
-
+import Navigation from './Navbar';
+import Routes from './Routes';
 
 /*
 import logo from './logo.svg';
@@ -35,14 +35,12 @@ export default App;
 */
 
 function App() {
-  return(
+  return (
     <div className="App">
       <Navigation />
       <Routes />
     </div>
-  )
+  );
 }
 
-
-
-export default App
+export default App;
