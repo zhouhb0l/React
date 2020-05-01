@@ -19,7 +19,15 @@ export default class GameOfLife extends React.Component {
       <section className="container">
         <div className="row mt-5">
           <div className="col-sm-6">
-            <Grid />
+            <Grid
+              isRunning={isRunning}
+              speed={0.5}
+              updateCount={(count) =>
+                this.setState({
+                  count,
+                })
+              }
+            />
           </div>
           <div className="col-sm-5 ">
             <h2 className="pb-5">
