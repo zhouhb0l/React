@@ -47,7 +47,7 @@ export default class Grid extends React.Component {
           let newY = j + dy < 0 ? l - 1 : j + dy === l ? 0 : j + dy;
           return acc + gridArray[newX][newY];
         }, 0);
-        console.log(sum, 'sum');
+
         gridCopy[i][j] =
           gridArray[i][j] === 0 ? Number(aliveRule.includes(sum)) : Number(dieRule.includes(sum));
       }
