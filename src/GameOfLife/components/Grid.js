@@ -4,7 +4,7 @@ import './Grid.css';
 
 const N = 11;
 
-const direction = [
+const DIRECTION = [
   [0, 1],
   [0, -1],
   [-1, 0],
@@ -29,7 +29,7 @@ export default class Grid extends React.Component {
 
     if (!this.checkIfRulesValid(rules)) return;
 
-    const { dieRule, aliveRule } = this.getRules(rules);
+    const { dieRule, bornRule } = this.getRules(rules);
 
     if (this.checkIfEmpty(gridArray)) {
       return;
@@ -42,14 +42,14 @@ export default class Grid extends React.Component {
     let gridCopy = cloneDeep(gridArray);
     for (let i = 0, m = gridArray.length; i < m; i++) {
       for (let j = 0, l = gridArray[i].length; j < l; j++) {
-        const sum = direction.reduce((acc, [dx, dy]) => {
+        const sum = DIRECTION.reduce((acc, [dx, dy]) => {
           let newX = i + dx < 0 ? m - 1 : i + dx === m ? 0 : i + dx;
           let newY = j + dy < 0 ? l - 1 : j + dy === l ? 0 : j + dy;
           return acc + gridArray[newX][newY];
         }, 0);
 
         gridCopy[i][j] =
-          gridArray[i][j] === 0 ? Number(aliveRule.includes(sum)) : Number(dieRule.includes(sum));
+          gridArray[i][j] === 0 ? Number(bornRule.includes(sum)) : Number(dieRule.includes(sum));
       }
     }
 
@@ -61,6 +61,9 @@ export default class Grid extends React.Component {
     }, speed * 1000);
   }
 
+  /**
+   * get die rules and born rules
+   */
   getRules(rules) {
     const _rules = rules.split(';');
 
@@ -70,14 +73,14 @@ export default class Grid extends React.Component {
       }
       return acc;
     }, []);
-    const aliveRule = _rules[0].split('').reduce((acc, cur, idx) => {
+    const bornRule = _rules[0].split('').reduce((acc, cur, idx) => {
       if (Number(cur) === 1) {
         return [...acc, idx];
       }
       return acc;
     }, []);
 
-    return { dieRule, aliveRule };
+    return { dieRule, bornRule };
   }
 
   /**

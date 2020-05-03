@@ -51,7 +51,7 @@ export default class GameOfLife extends React.Component {
             </h2>
 
             <div className="pb-3">
-              <label>Rules</label>
+              <label>Rules (Born;Die)</label>
               <input
                 className="form-control"
                 placeholder="Rules"
@@ -69,8 +69,8 @@ export default class GameOfLife extends React.Component {
               <input
                 className="form-control"
                 type="range"
-                min="0.1"
-                max="0.9"
+                min="0.05"
+                max="0.95"
                 step="0.05"
                 disabled={isRunning}
                 value={speed}
