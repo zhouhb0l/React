@@ -48,9 +48,7 @@ export default class Grid extends React.Component {
           return acc + gridArray[newX][newY];
         }, 0);
         gridCopy[i][j] =
-          gridArray[i][j] === 0
-            ? Number(sum === dieRule)
-            : Number(sum >= aliveRule[0] && sum <= aliveRule[1]);
+          gridArray[i][j] === 0 ? Number(dieRule.includes(sum)) : Number(aliveRule.includes(sum));
       }
     }
 
@@ -65,8 +63,18 @@ export default class Grid extends React.Component {
   getRules(rules) {
     const _rules = rules.split(';');
 
-    const dieRule = _rules[1].indexOf('1');
-    const aliveRule = [_rules[0].indexOf('1'), _rules[0].lastIndexOf('1')];
+    const dieRule = _rules[1].split('').reduce((acc, cur, idx) => {
+      if (Number(cur) === 1) {
+        return [...acc, idx];
+      }
+      return acc;
+    }, []);
+    const aliveRule = _rules[0].split('').reduce((acc, cur, idx) => {
+      if (Number(cur) === 1) {
+        return [...acc, idx];
+      }
+      return acc;
+    }, []);
 
     return { dieRule, aliveRule };
   }
@@ -80,9 +88,7 @@ export default class Grid extends React.Component {
       _rules.length !== 2 ||
       _rules[0].length !== _rules[1].length ||
       _rules[0].length !== 5 ||
-      _rules[1].length !== 5 ||
-      _rules[1].replace(/0/g, '').length !== 1 ||
-      _rules[0].replace(/0/g, '').length !== 2
+      _rules[1].length !== 5
     )
       return false;
 
