@@ -5,6 +5,7 @@ import Tic from './Tic/Tic';
 import Game24 from './Game24/Game24';
 import LineOrSquare from './LineOrSquare/LineOrSquare';
 import GameOfLife from './GameOfLife/GameOfLife';
+import Phi from './Phi/index';
 
 import history from './history';
 
@@ -17,6 +18,7 @@ class Routes extends React.Component {
           <Route path="/Tic" component={Tic} />
           <Route path="/LineOrSquare" component={LineOrSquare} />
           <Route path="/GameOfLife" component={GameOfLife} />
+          <Route path="/Phi" component={Phi} />
         </Switch>
       </Router>
     );

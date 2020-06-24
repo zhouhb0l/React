@@ -10,6 +10,7 @@ const Navigation = (props) => {
         <Nav.Link href="/Game24"> Twenty-Four</Nav.Link>
         <Nav.Link href="/LineOrSquare">Line-Or-Square</Nav.Link>
         <Nav.Link href="/GameOfLife">Game-of-Life</Nav.Link>
+        <Nav.Link href="/Phi">Phi</Nav.Link>
       </Nav>
     </Navbar>
   );
