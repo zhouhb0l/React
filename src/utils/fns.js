@@ -1,4 +1,5 @@
 import JSBI from 'jsbi';
+import BigNumber from "bignumber.js"
 
 export function decimal2Binary(str) {
   const arr = [];
@@ -34,6 +35,10 @@ export function isBinary(str) {
 export function isDecimal(str) {
   return new RegExp(/^[0-9]*$/).test(str);
 }
+
+//tips for you, use `BigNumber` handle big number calculation
+//before you start, run `npm install`, new dependencies installed
+//here is documents https://github.com/MikeMcl/bignumber.js/
 
 /**
  * @param {string}  n
