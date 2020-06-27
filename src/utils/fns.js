@@ -34,3 +34,19 @@ export function isBinary(str) {
 export function isDecimal(str) {
   return new RegExp(/^[0-9]*$/).test(str);
 }
+
+/**
+ * @param {string}  n
+ * @return {string} Number of totatives to n
+ */
+export function calculateTotatives(n) {
+  return '';
+}
+
+/**
+ * @param {string}  totatives
+ * @return {string} integer n
+ */
+export function calculateInteger(totatives) {
+  return '';
+}
