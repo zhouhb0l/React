@@ -4,24 +4,53 @@ import {
   isDecimal,
   decimal2Binary,
   binary2Decimal,
+  binaryToChar,
+  charToBinary,
   calculateTotatives,
   calculateInteger,
 } from '../utils/fns';
+import { chunk } from 'lodash/array';
 import { Button } from 'react-bootstrap';
 
 function Phi() {
   const [decimal, setDecimal] = useState('');
   const [binary, setBinary] = useState('');
+  const [ascii, setAscii] = useState('are you still there if i wake up in the middle of the night');
 
   const [intergerN, setIntergerN] = useState('');
   const [numberOfTotatives, setNumberOfTotatives] = useState('');
 
-  const handleConvertD2B = () => {
+  const handleConvert = () => {
+    let b;
     if (decimal) {
-      setBinary(decimal2Binary(decimal));
-    } else if (binary) {
-      setDecimal(binary2Decimal(binary));
+      b = decimal2Binary(decimal);
+      b = '0'.repeat(8 - (b.length % 8)) + b;
+      setBinary(b);
+      const binaryChunk = chunk(b.split(''), 8).map((item) => item.join(''));
+      setAscii(binaryToChar(binaryChunk));
+      return;
     }
+
+    if (binary) {
+      b = binary;
+      b = '0'.repeat(8 - (b.length % 8)) + b;
+      setDecimal(binary2Decimal(binary));
+      const binaryChunk = chunk(b.split(''), 8).map((item) => item.join(''));
+      setAscii(binaryToChar(binaryChunk));
+      return;
+    }
+
+    if (ascii) {
+      b = charToBinary(ascii).split(' ').join('');
+      setBinary(b);
+      setDecimal(binary2Decimal(b));
+    }
+  };
+
+  const handleClear = () => {
+    setBinary('');
+    setDecimal('');
+    setAscii('');
   };
 
   const handleInvertEuler = () => {
@@ -38,7 +67,7 @@ function Phi() {
         <div className="row">
           <div className="col-sm-8 group">
             <label>Decimal:</label>
-            <input
+            <textarea
               className="form-control"
               placeholder="Decimal"
               value={decimal}
@@ -57,7 +86,23 @@ function Phi() {
             />
           </div>
           <div className="col-sm-4">
-            <Button variant="outline-secondary" onClick={() => handleConvertD2B()}>
+            <Button variant="outline-secondary" onClick={() => handleClear()}>
+              Clear
+            </Button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-8 group">
+            <label>Characters:</label>
+            <textarea
+              className="form-control"
+              placeholder="Say what you wanna say here"
+              value={ascii}
+              onChange={(e) => setAscii(e.target.value)}
+            />
+          </div>
+          <div className="col-sm-4">
+            <Button variant="outline-secondary" onClick={() => handleConvert()}>
               Convert
             </Button>
           </div>

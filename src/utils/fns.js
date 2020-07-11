@@ -1,5 +1,5 @@
 import JSBI from 'jsbi';
-import BigNumber from "bignumber.js"
+import BigNumber from 'bignumber.js';
 
 export function decimal2Binary(str) {
   const arr = [];
@@ -34,6 +34,37 @@ export function isBinary(str) {
 
 export function isDecimal(str) {
   return new RegExp(/^[0-9]*$/).test(str);
+}
+
+export function charToBinary(str) {
+  let result = [];
+  let list = str.split('');
+  for (let i = 0; i < list.length; i++) {
+    if (i != 0) {
+      //加空格，分割二进制
+      result.push(' ');
+    }
+    let item = list[i];
+    //将字符串转化为二进制数据
+    let binaryStr = item.charCodeAt().toString(2);
+    binaryStr = '0'.repeat(8 - binaryStr.length) + binaryStr;
+    result.push(binaryStr);
+  }
+  return result.join('');
+}
+
+export function binaryToChar(chunk) {
+  let result = [];
+  //
+  for (let i = 0; i < chunk.length; i++) {
+    let item = chunk[i];
+    //to asciicode
+    let asciiCode = parseInt(item, 2);
+    //to charactor
+    let charValue = String.fromCharCode(asciiCode) || '-';
+    result.push(charValue);
+  }
+  return result.join('');
 }
 
 //tips for you, use `BigNumber` handle big number calculation
